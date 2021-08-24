@@ -32,10 +32,10 @@ Other used tools:
 
 screenshots:
 user part
-[alt text](screenshots/user.png "user part")​
+![alt text](screenshots/user.png "user part")​
 
 user part
-[alt text](screenshots/admin.png "admin part")​
+![alt text](screenshots/admin.png "admin part")​
 
 ## About Laravel
 
