@@ -16,6 +16,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories.single', ['slug' => 'make-money']) }}">Make Money</a>
                     </li>
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login.create') }}">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register.create') }}">Register</a>
+                    </li>
+                    @endguest
+                    @auth
+                    @if (Auth::user()->is_admin)
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.index') }}">Admin Panel</a>
+                        </li>
+                    @endif
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Log out</a>
+                    </li>
+
+                    @endauth
                 </ul>
                 <form class="form-inline" method="get" action="{{route ('search')}}">
                     <input name="s" class="form-control mr-sm-2 @error('s') is-invalid @enderror" type="text" placeholder="How may I help?" required>

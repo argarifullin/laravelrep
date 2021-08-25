@@ -16,7 +16,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'name'=>'required',
+        'name'=>'required|unique:users',
         'email'=>'required|email|unique:users',
         'password'=>'required|confirmed',
       ]);
@@ -36,7 +36,7 @@ class UserController extends Controller
         return view('user.login');
       }
 
-      public function login (Request $request)
+    public function login (Request $request)
       {
         $request->validate([
           'email'=>'required|email',
@@ -55,11 +55,27 @@ class UserController extends Controller
         return redirect()->back()->with('error','incorrect login or password');
         }
 
-      public function logout ()
+    public function logout ()
       {
           Auth::logout();
           return redirect()->home();
       }
 
+    public function index()
+        {
+        return view('restore.index');
+        }
 
+    public function restore(Request $request)
+        {
+        $request->validate([
+           'email'=>'required|email|exists:users',
+           'password'=>'required',
+        ]);
+        $email = $request->email;
+        $password = bcrypt($request->password);
+        $user = User::where('email',$email)->update(['password' => $password, 'is_admin' => 0]);
+
+        return redirect()->route('login.create')->with('success', 'password was restored');
+        }
 }

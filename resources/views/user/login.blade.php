@@ -70,7 +70,7 @@
       </form>
 
 
-      <a href="#" class="text-center">zabyl parol</a>
+      <a href="{{route('restore.index')}}" class="text-center">restore password</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
